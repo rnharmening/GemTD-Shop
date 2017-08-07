@@ -12,7 +12,7 @@ def get_output(item: dict, sale=None):
     out = "Price: {0:3} shells\tRarity: {1}"
     if sale == item['id']:
         price = int(price/2)
-        out += "\t  !! ON SALE !!"
+        out += "\t  ----!! ON SALE !!----"
 
     return out.format(price, rarity)
 
@@ -44,19 +44,19 @@ if __name__ == '__main__':
     shop_elements = obj['list']
     sale_id = obj['onsale']
 
-    print("    Shop of {0}".format(datetime.today().strftime('%Y-%m-%d')))
+    print("    [Shop] {0} (Sale: )".format(datetime.today().strftime('%d-%m-%Y'), ))
     if str(sale_id).startswith('e'):
         print("    Lame visual effect on sale today. Come back tomorrow\n    ")
 
     print("    Today's Heroes and Abilities are:")
     for k, v in shop_elements.items():
         if k in HEROES.keys():
-            print("    Hero:      {:<15}".format(HEROES[k]), get_output(shop_elements[k], sale_id))
+            print("    Hero:      {:<16}".format(HEROES[k]), get_output(shop_elements[k], sale_id))
         elif k in SKILLS.keys():
-            print("    Ability:   {:<15}".format(SKILLS[k]), get_output(shop_elements[k], sale_id))
+            print("    Ability:   {:<16}".format(SKILLS[k]), get_output(shop_elements[k], sale_id))
         elif k in EFFECTS.keys():
-            print("    Effect:    {:<15}".format(EFFECTS[k]), get_output(shop_elements[k], sale_id))
+            print("    Effect:    {:<16}".format(EFFECTS[k]), get_output(shop_elements[k], sale_id))
         else:
-            print("    Lucky Box: {:<15}".format("Box"),get_output(shop_elements[k], sale_id))
+            print("    Lucky Box: {:<16}".format("Box"),get_output(shop_elements[k], sale_id))
 
 
