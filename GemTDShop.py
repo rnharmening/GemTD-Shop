@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import json
 from datetime import datetime
 
-from shop_index import HEROES, ABILITY, EFFECTS, TYPE
+from shop_index import *
 
 
 def format_title(sale_id=None):
