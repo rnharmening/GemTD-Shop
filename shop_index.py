@@ -124,6 +124,8 @@ EFFECTS = {
 
 }
 
+COMBINED = {**HEROES,**ABILITY,**EFFECTS}
+
 TYPE = {
     'h': 'Hero',
     'a': 'Ability',

@@ -8,38 +8,36 @@ from shop_index import *
 
 def format_title(sale_id=None):
     # Get the item on sale by getting the id form all 3 dicts
-    sale_name = {**HEROES, **ABILITY, **EFFECTS}[sale_id]
-    # The type is indikated by the first character of the id
+    sale_name = COMBINED[sale_id]
+    # The type is indicated by the first character of the id
     sale_type = TYPE[sale_id[0]]
     return "    [Shop] {0} ({2} on Sale: {1})"\
         .format(datetime.today().strftime('%d-%m-%Y'), sale_name, sale_type)
 
 
 def format_item_output(item: dict, sale=None):
+    item_id = item['id']
     price = item['price']
     rarity = str(item['rarity']).split('_')[0]
-    out = "Price: {0:3} shells\tRarity: {1}"
-    if sale == item['id']:
-        price = int(price/2)
-        out += "\t  -!! ON SALE !!-"
 
-    return out.format(price, rarity)
+    out = "    {0:7}:\t {1:<16}\t {2:3} shells\t Rarity: {3}\n"
+    if sale == item_id:
+        price = int(price/2)
+
+        out = "    --------     On Sale:      ----------------\n" + out+\
+              "    --------                   ----------------\n"
+
+    return out.format(TYPE[item_id[0]], COMBINED[item_id], price, rarity)
 
 
 def format_lines_of_shop(shop_elements, sale_id):
     for k, v in shop_elements.items():
-        if k in HEROES.keys():
-            yield "    Hero:      {0:<16} {1}\n".format(HEROES[k], format_item_output(shop_elements[k], sale_id))
-        elif k in ABILITY.keys():
-            yield "    Ability:   {0:<16} {1}\n".format(ABILITY[k], format_item_output(shop_elements[k], sale_id))
-        elif k in EFFECTS.keys():
-            yield "    Effect:    {0:<16} {1}\n".format(EFFECTS[k], format_item_output(shop_elements[k], sale_id))
-        else:
-            yield "    Lucky Box: {0:<16} {1}\n".format("Box", format_item_output(shop_elements[k], sale_id))
+        if k in COMBINED.keys():
+            yield format_item_output(v, sale_id)
 
 
 def main():
-    url = "http://101.200.189.65:430/gemtd/goods/list/v1/@0"  # @steam ID lets you check for this id
+    url = "http://101.200.189.65:430/gemtd/goods/list/v1/@0"  # @steam ID lets you check for your id
     # url = "http://101.200.189.65:430/gemtd/goods/list/v1?hehe=0.3792814633343369"
     html = urllib.request.urlopen(url).read()
     soup = BeautifulSoup(html, "lxml")
@@ -62,13 +60,14 @@ def main():
     # create dict from json
     obj = json.loads(json_str)
 
-    #read out the shop items(dict) and the sale ID(str)
+    # read out the shop items(dict) and the sale ID(str)
     shop_elements = obj['list']
     sale_id = obj['onsale']
 
     print(format_title(sale_id))
     print("    Today's Heroes and Abilities are:")
     print(*format_lines_of_shop(shop_elements, sale_id), sep='')
+
 
 
 if __name__ == '__main__':
