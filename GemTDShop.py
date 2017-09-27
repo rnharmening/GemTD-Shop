@@ -3,28 +3,50 @@ from bs4 import BeautifulSoup
 import json
 from datetime import datetime
 
-from shop_index import HEROES, SKILLS, EFFECTS
+from shop_index import HEROES, ABILITY, EFFECTS, TYPE
 
 
-def get_output(item: dict, sale=None):
+def format_title(sale_id=None):
+    # Get the item on sale by getting the id form all 3 dicts
+    sale_name = {**HEROES, **ABILITY, **EFFECTS}[sale_id]
+    # The type is indikated by the first character of the id
+    sale_type = TYPE[sale_id[0]]
+    return "    [Shop] {0} ({2} on Sale: {1})"\
+        .format(datetime.today().strftime('%d-%m-%Y'), sale_name, sale_type)
+
+
+def format_item_output(item: dict, sale=None):
     price = item['price']
     rarity = str(item['rarity']).split('_')[0]
     out = "Price: {0:3} shells\tRarity: {1}"
     if sale == item['id']:
         price = int(price/2)
-        out += "\t  ----!! ON SALE !!----"
+        out += "\t  -!! ON SALE !!-"
 
     return out.format(price, rarity)
 
 
-if __name__ == '__main__':
-    url = "http://101.200.189.65:430/gemtd/goods/list/v1?hehe=0.3792814633343369"
+def format_lines_of_shop(shop_elements, sale_id):
+    for k, v in shop_elements.items():
+        if k in HEROES.keys():
+            yield "    Hero:      {0:<16} {1}\n".format(HEROES[k], format_item_output(shop_elements[k], sale_id))
+        elif k in ABILITY.keys():
+            yield "    Ability:   {0:<16} {1}\n".format(ABILITY[k], format_item_output(shop_elements[k], sale_id))
+        elif k in EFFECTS.keys():
+            yield "    Effect:    {0:<16} {1}\n".format(EFFECTS[k], format_item_output(shop_elements[k], sale_id))
+        else:
+            yield "    Lucky Box: {0:<16} {1}\n".format("Box", format_item_output(shop_elements[k], sale_id))
+
+
+def main():
+    url = "http://101.200.189.65:430/gemtd/goods/list/v1/@0"  # @steam ID lets you check for this id
+    # url = "http://101.200.189.65:430/gemtd/goods/list/v1?hehe=0.3792814633343369"
     html = urllib.request.urlopen(url).read()
     soup = BeautifulSoup(html, "lxml")
 
     # kill all script and style elements
     for script in soup(["script", "style"]):
-        script.extract()    # rip it out
+        script.extract()  # rip it out
 
     # get text
     text = soup.get_text()
@@ -40,23 +62,15 @@ if __name__ == '__main__':
     # create dict from json
     obj = json.loads(json_str)
 
-
+    #read out the shop items(dict) and the sale ID(str)
     shop_elements = obj['list']
     sale_id = obj['onsale']
 
-    print("    [Shop] {0} (Sale: )".format(datetime.today().strftime('%d-%m-%Y'), ))
-    if str(sale_id).startswith('e'):
-        print("    Lame visual effect on sale today. Come back tomorrow\n    ")
-
+    print(format_title(sale_id))
     print("    Today's Heroes and Abilities are:")
-    for k, v in shop_elements.items():
-        if k in HEROES.keys():
-            print("    Hero:      {:<16}".format(HEROES[k]), get_output(shop_elements[k], sale_id))
-        elif k in SKILLS.keys():
-            print("    Ability:   {:<16}".format(SKILLS[k]), get_output(shop_elements[k], sale_id))
-        elif k in EFFECTS.keys():
-            print("    Effect:    {:<16}".format(EFFECTS[k]), get_output(shop_elements[k], sale_id))
-        else:
-            print("    Lucky Box: {:<16}".format("Box"),get_output(shop_elements[k], sale_id))
+    print(*format_lines_of_shop(shop_elements, sale_id), sep='')
 
+
+if __name__ == '__main__':
+    main()
 

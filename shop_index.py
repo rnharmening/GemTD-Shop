@@ -49,7 +49,7 @@ HEROES = {
     'h409': 'Legion Commander'
 }
 
-SKILLS = {
+ABILITY = {
     'a101': 'Heal',
     'a102': 'Evade',
     'a103': 'Guard',
@@ -76,7 +76,7 @@ SKILLS = {
 }
 
 EFFECTS = {
-	"e101": "Devine",
+    "e101": "Devine",
     "e102": "Ruby",
     "e103": "Fireworks",
     "e104": "CrystalRift",
@@ -122,4 +122,10 @@ EFFECTS = {
     "e404": "RoshPlatinum",
     "e405": "Brilliant"
 
+}
+
+TYPE = {
+    'h': 'Hero',
+    'a': 'Ability',
+    'e': 'Effect'
 }
