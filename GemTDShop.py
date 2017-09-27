@@ -34,6 +34,8 @@ def format_lines_of_shop(shop_elements, sale_id):
     for k, v in shop_elements.items():
         if k in COMBINED.keys():
             yield format_item_output(v, sale_id)
+        elif k != 'h0':
+            yield "    {0}\n".format(v)
 
 
 def main():
