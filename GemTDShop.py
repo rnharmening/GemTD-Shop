@@ -5,6 +5,9 @@ from datetime import datetime
 
 from shop_index import *
 
+SHOP_URL = "http://101.200.189.65:430/gemtd/goods/list/v2/@0"  # @steam ID lets you check for your id
+# url = "http://101.200.189.65:430/gemtd/goods/list/v1/@0"  # Old Shop URL
+# url = "http://101.200.189.65:430/gemtd/goods/list/v1?hehe=0.3792814633343369"
 
 def format_title(sale_id=None):
     # Get the item on sale by getting the id form all 3 dicts
@@ -39,10 +42,8 @@ def format_lines_of_shop(shop_elements, sale_id):
 
 
 def main():
-    url = "http://101.200.189.65:430/gemtd/goods/list/v2/@0"  # @steam ID lets you check for your id
-    # url = "http://101.200.189.65:430/gemtd/goods/list/v1/@0"  # Old Shop URL
-    # url = "http://101.200.189.65:430/gemtd/goods/list/v1?hehe=0.3792814633343369"
-    html = urllib.request.urlopen(url).read()
+
+    html = urllib.request.urlopen(SHOP_URL).read()
     soup = BeautifulSoup(html, "lxml")
 
     # kill all script and style elements
