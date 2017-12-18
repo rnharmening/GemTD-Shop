@@ -39,7 +39,8 @@ def format_lines_of_shop(shop_elements, sale_id):
 
 
 def main():
-    url = "http://101.200.189.65:430/gemtd/goods/list/v1/@0"  # @steam ID lets you check for your id
+    url = "http://101.200.189.65:430/gemtd/goods/list/v2/@0"  # @steam ID lets you check for your id
+    # url = "http://101.200.189.65:430/gemtd/goods/list/v1/@0"  # Old Shop URL
     # url = "http://101.200.189.65:430/gemtd/goods/list/v1?hehe=0.3792814633343369"
     html = urllib.request.urlopen(url).read()
     soup = BeautifulSoup(html, "lxml")
