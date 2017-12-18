@@ -9,7 +9,15 @@ SHOP_URL = "http://101.200.189.65:430/gemtd/goods/list/v2/@0"  # @steam ID lets 
 # url = "http://101.200.189.65:430/gemtd/goods/list/v1/@0"  # Old Shop URL
 # url = "http://101.200.189.65:430/gemtd/goods/list/v1?hehe=0.3792814633343369"
 
+
 def format_title(sale_id=None):
+    """
+    This function creates a string containing the date of today, the sale item and its type (Hero, Ability, Effect)
+    Useful for title of an reddit thread.
+    :param sale_id: the id of todays sale
+    :return: String, formattet title containing current date and current item on sale
+    """
+
     # Get the item on sale by getting the id form all 3 dicts
     sale_name = COMBINED[sale_id]
     # The type is indicated by the first character of the id
@@ -18,13 +26,13 @@ def format_title(sale_id=None):
         .format(datetime.today().strftime('%d-%m-%Y'), sale_name, sale_type)
 
 
-def format_item_output(item: dict, sale=None):
+def format_item_output(item: dict, sale_id=None):
     item_id = item['id']
     price = item['price']
     rarity = str(item['rarity']).split('_')[0]
 
     out = "    {0:7}:\t {1:<16}\t {2:3} shells\t Rarity: {3}\n"
-    if sale == item_id:
+    if sale_id == item_id:
         price = int(price/2)
 
         out = "    --------     On Sale:      ----------------\n" + out+\
