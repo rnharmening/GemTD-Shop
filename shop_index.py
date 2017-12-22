@@ -134,7 +134,7 @@ EFFECTS = {
     "e316": "Stars",
     "e317": "Love&Love",
     "e319": "ShiningStars"
-    "e320": "Maelstrom"
+    "e320": "Maelstrom",
     "e401": "RoshLava",
     "e402": "RoshFrost",
     "e403": "RoshGold",
