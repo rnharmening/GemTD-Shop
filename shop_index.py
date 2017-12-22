@@ -9,6 +9,7 @@ HEROES = {
     'h107': 'Keeper of The Light',
     'h108': 'Rubick',
     'h109': 'Jakiro',
+    'h110': 'Sand King',     
     'h201': 'Crystal Maiden',
     'h202': 'Death Prophet',
     'h203': 'Templar Assassin',
@@ -25,6 +26,9 @@ HEROES = {
     'h214': 'Kunkka',
     'h215': 'Axe',
     'h216': 'Slark',
+    'h217': 'Viper',
+    'h218': 'Tusk',
+    'h219': 'Abaddon',
     'h301': 'Windrunner',
     'h302': 'Phantom Assassin',
     'h303': 'Sniper',
@@ -38,6 +42,9 @@ HEROES = {
     'h311': 'Shredder',
     'h312': 'Slardar',
     'h313': 'Antimage',
+    'h314': 'Bristleback',
+    'h315': 'Lycan',
+    'h316': 'Lone Druid',
     'h401': 'Vengeful Spirit',
     'h402': 'Invoker',
     'h403': 'Alchemist',
@@ -46,7 +53,12 @@ HEROES = {
     'h406': 'Techies',
     'h407': 'Chaos Knight',
     'h408': 'Faceless Void',
-    'h409': 'Legion Commander'
+    'h409': 'Legion Commander',
+    'h410': 'Monkey King',
+    'h411': 'Razor',
+    'h412': 'Tinker',
+    'h413': 'Pangolier',
+    'h414': 'Dark Willow'
 }
 
 ABILITY = {
@@ -63,16 +75,19 @@ ABILITY = {
     'a207': 'Topaz',
     'a208': 'Amethyst',
     'a211': 'Adjacent Swap',
+    'a212': 'StoneHenge',   
     'a301': 'Fast Shoot',
     'a302': 'Crit',
     'a303': 'Aim',
     'a304': 'Hummer',
     'a306': 'TimeLapse',
     'a307': 'Fatal Bonds',
+    'a308': 'Ursol Whirl',   
     'a401': 'Swap',
     'a210': 'Common Pray',
     'a305': 'Flawless Pray',
-    'a402': 'Perfect Pray'
+    'a402': 'Perfect Pray',
+    'a403': 'Candy Marker'
 }
 
 EFFECTS = {
@@ -88,6 +103,7 @@ EFFECTS = {
     "e110": "BlueStorm",
     "e111": "HappyTogether",
     "e112": "Gem",
+    "e113": "Foggy",
     "e201": "Illusion",
     "e202": "KingGhosts",
     "e203": "Polycount",
@@ -116,11 +132,18 @@ EFFECTS = {
     "e314": "PurpleMeteor",
     "e315": "Nightmare",
     "e316": "Stars",
+    "e317": "Love&Love",
+    "e319": "ShiningStars"
+    "e320": "Maelstrom"
     "e401": "RoshLava",
     "e402": "RoshFrost",
     "e403": "RoshGold",
     "e404": "RoshPlatinum",
-    "e405": "Brilliant"
+    "e405": "Brilliant",
+    "e406": "StarSapphire",
+    "e407": "Sand&Rock",
+    "e408": "DarkMoon",
+    "e409": "Bloody"  
 
 }
 
