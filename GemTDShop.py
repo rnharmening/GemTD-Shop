@@ -1,7 +1,8 @@
 import urllib.request
 from bs4 import BeautifulSoup
 import json
-from datetime import datetime
+from datetime import datetime, timedelta
+import time
 
 from shop_index import *
 
@@ -9,6 +10,16 @@ SHOP_URL = "http://101.200.189.65:430/gemtd/goods/list/v2/@0"  # @steam ID lets 
 # url = "http://101.200.189.65:430/gemtd/goods/list/v1/@0"  # Old Shop URL
 # url = "http://101.200.189.65:430/gemtd/goods/list/v1?hehe=0.3792814633343369"
 
+dtnow = datetime.utcnow()
+
+dt22 = None
+if dtnow.hour < 21:
+    dt22 = datetime(dtnow.year, dtnow.month, dtnow.day, 21, 0, 0, 0)
+else:
+    tmrw = dtnow + timedelta(days=1)
+    dt22 = datetime(tmrw.year, tmrw.month, tmrw.day, 21, 0, 0, 0)
+
+diff=dt22-dtnow
 
 def format_title(sale_id=None):
     """
@@ -22,16 +33,19 @@ def format_title(sale_id=None):
     sale_name = COMBINED[sale_id]
     # The type is indicated by the first character of the id
     sale_type = TYPE[sale_id[0]]
-    return "    [Shop] {0} ({2} on Sale: {1})"\
-        .format(datetime.today().strftime('%d-%m-%Y'), sale_name, sale_type)
+    return "    [Shop] {0} ({2} on Sale: {1}) [{3}h till refresh]"\
+        .format(datetime.today().strftime('%d-%m-%Y'), sale_name, sale_type, divmod(diff.seconds,3600)[0])
 
 
 def format_item_output(item: dict, sale_id=None):
     item_id = item['id']
     price = item['price']
     rarity = str(item['rarity']).split('_')[0]
+    
 
     out = "    {0:7}:\t {1:<16}\t {2:3} shells\t Rarity: {3}\n"
+    if price > 800:
+        out = "    {0:7}:\t {1:<16}\t {2:3} blocks\t Rarity: {3}\n"
     if sale_id == item_id:
         price = int(price/2)
 
@@ -39,7 +53,6 @@ def format_item_output(item: dict, sale_id=None):
               "    --------                   ----------------\n"
 
     return out.format(TYPE[item_id[0]], COMBINED[item_id], price, rarity)
-
 
 def format_lines_of_shop(shop_elements, sale_id):
     for k, v in shop_elements.items():
