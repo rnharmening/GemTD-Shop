@@ -9,7 +9,7 @@ HEROES = {
     'h107': 'Keeper of The Light',
     'h108': 'Rubick',
     'h109': 'Jakiro',
-    'h110': 'Sand King',     
+    'h110': 'Sand King',
     'h201': 'Crystal Maiden',
     'h202': 'Death Prophet',
     'h203': 'Templar Assassin',
@@ -75,14 +75,14 @@ ABILITY = {
     'a207': 'Topaz',
     'a208': 'Amethyst',
     'a211': 'Adjacent Swap',
-    'a212': 'StoneHenge',   
+    'a212': 'StoneHenge',
     'a301': 'Fast Shoot',
     'a302': 'Crit',
     'a303': 'Aim',
     'a304': 'Hummer',
     'a306': 'TimeLapse',
     'a307': 'Fatal Bonds',
-    'a308': 'Ursol Whirl',   
+    'a308': 'Ursol Whirl',
     'a401': 'Swap',
     'a210': 'Common Pray',
     'a305': 'Flawless Pray',
@@ -143,11 +143,11 @@ EFFECTS = {
     "e406": "StarSapphire",
     "e407": "Sand&Rock",
     "e408": "DarkMoon",
-    "e409": "Bloody"  
+    "e409": "Bloody"
 
 }
 
-COMBINED = {**HEROES,**ABILITY,**EFFECTS}
+COMBINED = {**HEROES, **ABILITY, **EFFECTS}
 
 TYPE = {
     'h': 'Hero',
