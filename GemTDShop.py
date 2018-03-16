@@ -7,9 +7,10 @@ from datetime import datetime, timedelta
 
 from shop_index import *
 
-SHOP_URL = "http://101.200.189.65:430/gemtd/goods/list/v2/@0"  # @steam ID lets you check for your id
-# url = "http://101.200.189.65:430/gemtd/goods/list/v1/@0"  # Old Shop URL
-# url = "http://101.200.189.65:430/gemtd/goods/list/v1?hehe=0.3792814633343369"
+SHOP_URL = "http://101.200.189.65:430/gemtd/201803/goods/list/@0" # @steam ID lets you check for your id
+# SHOP_URL = "http://101.200.189.65:430/gemtd/goods/list/v2/@0"  # Old Shop URL
+# SHOP_URL = "http://101.200.189.65:430/gemtd/goods/list/v1/@0"  # Old Shop URL
+# SHOP_URL = "http://101.200.189.65:430/gemtd/goods/list/v1?hehe=0.3792814633343369"
 
 
 def calculate_time_until_refresh():
