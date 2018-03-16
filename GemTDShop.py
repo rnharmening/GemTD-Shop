@@ -13,7 +13,7 @@ SHOP_URL = "http://101.200.189.65:430/gemtd/201803/goods/list/@0" # @steam ID le
 # SHOP_URL = "http://101.200.189.65:430/gemtd/goods/list/v1?hehe=0.3792814633343369"
 
 
-def calculate_time_until_refresh():
+def calculate_time_until_refresh() -> int:
     """
     Calculates the duration until the next shop update,
     right no not in use
@@ -109,7 +109,7 @@ def main():
     # read out the shop items(dict) and the sale ID(str)
     shop_elements = obj['list']
     sale_id = obj['onsale']
-    time_to_refresh = str(math.floor(obj['expire'] / 60 / 60))
+    time_to_refresh = math.floor(obj['expire'] / 60 / 60)
 
     print(format_title(sale_id, time_to_refresh))
     print("    Today's Heroes and Abilities are:")
