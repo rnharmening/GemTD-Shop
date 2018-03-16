@@ -1,4 +1,6 @@
 import urllib.request
+
+import math
 from bs4 import BeautifulSoup
 import json
 from datetime import datetime, timedelta
@@ -22,6 +24,7 @@ def calculate_time_until_refresh():
     diff = update_time-today
 
     return divmod(diff.seconds,3600)[0]
+
 
 def format_title(sale_id=None, time_to_refresh="??"):
     """
@@ -101,11 +104,11 @@ def main():
     shop_elements = obj['list']
     sale_id = obj['onsale']
     time_to_refresh = calculate_time_until_refresh()
+    time_to_refresh = str(math.floor(obj['expire'] / 60 / 60))
 
     print(format_title(sale_id, time_to_refresh))
     print("    Today's Heroes and Abilities are:")
     print(*format_lines_of_shop(shop_elements, sale_id), sep='')
-
 
 
 if __name__ == '__main__':
